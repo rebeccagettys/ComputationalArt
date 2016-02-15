@@ -62,7 +62,7 @@ def evaluate_random_function(f, x, y):
     #         return x
     #     elif f[0]== 'y':
     #         return y
-
+    #lala
     if f[0] == 'x':
         return x #evaluate_random_function(f[1], x, y)
     elif f[0]== 'y':
