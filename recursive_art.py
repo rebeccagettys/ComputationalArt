@@ -2,6 +2,8 @@
 
 import random
 from PIL import Image
+import math
+
 
 
 def build_random_function(min_depth, max_depth):
@@ -15,7 +17,29 @@ def build_random_function(min_depth, max_depth):
                  (see assignment writeup for details on the representation of
                  these functions)
     """
+    #["elementary function name here", argument 1 (optional), argument 2 (optional)]
 
+    list_of_func = ["x", "y", "prod", "avg", "cos_pi", "sin_pi"] #
+    if max_depth == 1:
+        return random.choice(["x", "y"])
+    else:
+        random_func = random.choice(list_of_func)
+        if random_func in ['prod', 'avg']:
+            print "ADDING TWO FUNCS"
+            return [random.choice(list_of_func),build_random_function(min_depth -1, max_depth -1), build_random_function(min_depth -1, max_depth -1)]
+        else:
+            return [random.choice(list_of_func),build_random_function(min_depth -1, max_depth -1)]
+
+
+
+
+    #def fib(iterate):
+    #    if iterate == 0:
+    #        return 0
+    #    elif iterate ==1:
+    #        return 1
+    #    else:
+    #        return fib(iterate -1 ) + fib(iterate-2)
 
 
 def evaluate_random_function(f, x, y):
@@ -32,11 +56,29 @@ def evaluate_random_function(f, x, y):
         >>> evaluate_random_function(["y"],0.1,0.02)
         0.02
     """
-    if f == ['x']:
-        return x
-    if f== ['y']:
-        return y
+    #base case
+    # if len(f) == 1:
+    #     if f[0]== 'x':
+    #         return x
+    #     elif f[0]== 'y':
+    #         return y
 
+    if f[0] == 'x':
+        return x #evaluate_random_function(f[1], x, y)
+    elif f[0]== 'y':
+        return y #float((evaluate_random_function(f[1], x, y)))
+    elif f[0] == 'prod':
+        return float((evaluate_random_function(f[1], x, y))*(evaluate_random_function(f[2], x, y)))
+    elif f[0] ==  'avg':
+        return  float(0.5*(float((evaluate_random_function(f[1], x, y)))+float((evaluate_random_function(f[2], x, y)))))
+    elif f[0] == 'cos_pi':
+        return float(math.cos(math.pi*(evaluate_random_function(f[1], x, y))))
+    elif f[0] == 'sin_pi':
+        return float(math.sin(math.pi*((evaluate_random_function(f[1], x, y)))))
+    #elif f == 'negave':
+    #    return float(-0.5*(float((evaluate_random_function(f[1], x, y)))+float((evaluate_random_function(f[2], x, y)))))
+    #elif f== 'neg_sin_pi':
+        #return float(-1*math.sin(math.pi*((evaluate_random_function(f[1], x, y)))))
 
 
 def remap_interval(val,
@@ -161,8 +203,8 @@ if __name__ == '__main__':
     # Create some computational art!
     # TODO: Un-comment the generate_art function call after you
     #       implement remap_interval and evaluate_random_function
-    generate_art("myart.png")
-
+    generate_art("myart2.png")
+    #print build_random_function(2,7)
     # Test that PIL is installed correctly
     # TODO: Comment or remove this function call after testing PIL install
     #test_image("noise.png")
