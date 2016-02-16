@@ -43,8 +43,8 @@ def build_random_function(min_depth, max_depth):
 
 
 def evaluate_random_function(f, x, y):
-    """ Evaluate the random function f with inputs x,y
-        Representation of the function f is defined in the assignment writeup
+    """ Evaluate the random function f(represented as a string) with inputs x,y
+
 
         f: the function to evaluate
         x: the value of x to be used to evaluate the function
