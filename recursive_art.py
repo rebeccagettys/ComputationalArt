@@ -10,13 +10,14 @@ def build_random_function(min_depth, max_depth):
     """ Builds a random function of depth at least min_depth and depth
         at most max_depth (see assignment writeup for definition of depth
         in this context)
-
+        Randomly chooses one of a list of mathematical functions, and recursively composites them together into a nested list format
+        until the required depth is reached.
         min_depth: the minimum depth of the random function
         max_depth: the maximum depth of the random function
         returns: the randomly generated function represented as a nested list
                  (see assignment writeup for details on the representation of
                  these functions)
-    """
+           """
     #["elementary function name here", argument 1 (optional), argument 2 (optional)]
 
     list_of_func = ["x", "y", "prod", "avg", "cos_pi", "sin_pi"] #
@@ -25,10 +26,9 @@ def build_random_function(min_depth, max_depth):
     else:
         random_func = random.choice(list_of_func)
         if random_func in ['prod', 'avg']:
-            print "ADDING TWO FUNCS"
-            return [random.choice(list_of_func),build_random_function(min_depth -1, max_depth -1), build_random_function(min_depth -1, max_depth -1)]
+            return [random_func,build_random_function(min_depth -1, max_depth -1), build_random_function(min_depth -1, max_depth -1)]
         else:
-            return [random.choice(list_of_func),build_random_function(min_depth -1, max_depth -1)]
+            return [random_func,build_random_function(min_depth -1, max_depth -1)]
 
 
 
@@ -50,11 +50,13 @@ def evaluate_random_function(f, x, y):
         x: the value of x to be used to evaluate the function
         y: the value of y to be used to evaluate the function
         returns: the function value
+        Searches the list inputted recursively and evaluates each of the functions within the list, in proper order.
 
         >>> evaluate_random_function(["x"],-0.5, 0.75)
         -0.5
         >>> evaluate_random_function(["y"],0.1,0.02)
         0.02
+
     """
     #base case
     # if len(f) == 1:
@@ -107,6 +109,8 @@ def remap_interval(val,
         >>> remap_interval(5, 4, 6, 0, 2)
         1.0
         >>> remap_interval(5, 4, 6, 1, 2)
+        1.5
+        >>> remap_interval(5, 0, 10, 1, 2)
         1.5
     """
     #floatifying
