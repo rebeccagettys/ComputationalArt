@@ -58,7 +58,7 @@ def evaluate_random_function(f, x, y):
         0.02
 
     """
-    #base case  :
+    #base case :
     # if len(f) == 1:
     #     if f[0]== 'x':
     #         return x
